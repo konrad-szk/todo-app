@@ -4,18 +4,20 @@ import {CreateTaskCommand} from "./create-task.command";
 import {DeleteTaskCommand} from "./delete-task.command";
 import {CompleteTaskCommand} from "./complete-task.command";
 import {UncompleteTaskCommand} from "./uncomplete-task.command";
+import {CreateTodoListCommand} from "./create-todo-list.command";
+import {TodoListQuery} from "./todo-list.query";
 
 export const MANAGES_TODO_LIST_COMMAND_PORT = new InjectionToken<ManagesTodoListCommandPort>('MANAGES_TODO_LIST_COMMAND_PORT');
 
-export interface ManagesTodoListCommandPort extends CreatesTodoListCommandPort, DeletesTaskCommandPort, CompletesTaskCommandPort, UncompletesTaskCommandPort, CreatesTaskCommandPort {
+export interface ManagesTodoListCommandPort extends CreatesTodoListCommandPort, DeletesTaskCommandPort, CompletesTaskCommandPort, UncompletesTaskCommandPort, CreatesTaskCommandPort, GetsTodoList {
 }
 
 export interface CreatesTodoListCommandPort {
-  createTodoList(command: CreateTaskCommand): Observable<void>
+  createTodoList(command: CreateTodoListCommand): Observable<{ listId: string }>
 }
 
 export interface CreatesTaskCommandPort {
-  createTask(command: CreateTaskCommand): Observable<void>
+  createTask(command: CreateTaskCommand): Observable<{taskId: string}>
 }
 
 export interface DeletesTaskCommandPort {
@@ -28,4 +30,8 @@ export interface CompletesTaskCommandPort {
 
 export interface UncompletesTaskCommandPort {
   uncomplete(command: UncompleteTaskCommand): Observable<void>;
+}
+
+export interface GetsTodoList {
+  get(todoId: string): Observable<TodoListQuery>
 }

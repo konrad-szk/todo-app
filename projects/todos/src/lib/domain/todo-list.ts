@@ -9,6 +9,6 @@ export class TodoList {
   }
 
   get isComplete() {
-    return !this.tasks.some(task => !task.idDone())
+    return !this.tasks.some(task => !task.isDone)
   }
 }

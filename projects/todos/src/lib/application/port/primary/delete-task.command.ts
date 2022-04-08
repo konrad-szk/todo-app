@@ -1,6 +1,7 @@
 export class DeleteTaskCommand {
   constructor(
-    public readonly uuid: string
+    public readonly listId: string,
+    public readonly taskId: string
   ) {
   }
 }
