@@ -13,11 +13,11 @@ export class Task {
     this.desc = desc.trim();
   }
 
-  public done() {
+  public do() {
     this._isDone = true;
   }
 
-  public unDone() {
+  public undo() {
     this._isDone = false;
   }
 
