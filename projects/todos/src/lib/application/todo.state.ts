@@ -66,6 +66,7 @@ export class TodoState implements ManagesTaskCommandPort, CreatesTodoListCommand
     return this._managesTaskDtoPort.create(desc).pipe(
       map((dto: TaskDto) => new Task(dto.desc, dto.completed, dto.id)),
       tap((task: Task) => todoList.addTask(task)),
+      tap(() => this._todoLists.next([...this._todoLists.value, todoList])),
       mapTo({listId: todoList.uuid}),
       tap(({listId}) => this.router.navigate([listId, 'edit']))
     )
