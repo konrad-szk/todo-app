@@ -130,6 +130,37 @@
           "builder": "angular-cli-ghpages:deploy"
         }
       }
+    },
+    "todos": {
+      "projectType": "library",
+      "root": "projects/todos",
+      "sourceRoot": "projects/todos/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/todos/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/todos/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/todos/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/todos/src/test.ts",
+            "tsConfig": "projects/todos/tsconfig.spec.json",
+            "karmaConfig": "projects/todos/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "todo-app"
