@@ -1,9 +1,15 @@
 export class Task {
+  public readonly desc: string;
+
   constructor(
-    public desc: string,
+    desc: string,
     private _isDone = false,
     public readonly uuid: string = crypto.randomUUID(), // node14.17+
   ) {
+    if (!desc || desc.trim().length === 0) {
+      throw new Error('Invalid task value')
+    }
+    this.desc = desc.trim();
   }
 
   public done() {

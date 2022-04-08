@@ -11,4 +11,8 @@ export class TodoList {
   get isComplete() {
     return !this.tasks.some(task => !task.isDone)
   }
+
+  static fromTask(desc: string) {
+    return new TodoList([new Task(desc)])
+  }
 }

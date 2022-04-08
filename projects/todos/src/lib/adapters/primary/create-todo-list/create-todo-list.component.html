@@ -1,0 +1,11 @@
+<div class="my-container">
+  <form class="form-group" [formGroup]="form">
+    <textarea class="form-control" formControlName="desc"></textarea>
+  </form>
+<br>
+  <div class="d-flex justify-content-sm-between mt-3">
+    <button type="button" class="btn btn-primary" #createBtn [disabled]="form.invalid">Add task</button>
+    <button type="button" class="btn btn-light" routerLink="/">Cancel</button>
+  </div>
+
+</div>
