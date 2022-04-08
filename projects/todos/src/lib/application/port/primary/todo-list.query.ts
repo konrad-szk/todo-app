@@ -22,7 +22,7 @@ export class TaskQuery {
 
   static fromDomain(task: Task): TaskQuery {
     return new TaskQuery(
-      task.uuid,
+      task.id.toString(10),
       task.desc,
       task.isDone
     )

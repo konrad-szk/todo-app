@@ -4,7 +4,8 @@ export class Task {
   constructor(
     desc: string,
     private _isDone = false,
-    public readonly uuid: string = crypto.randomUUID(), // node14.17+
+    // public readonly uuid: string = crypto.randomUUID(), // node14.17+
+    public readonly id: number = +crypto.getRandomValues(new Uint32Array(10)).join()
   ) {
     if (!desc || desc.trim().length === 0) {
       throw new Error('Invalid task value')

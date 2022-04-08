@@ -12,6 +12,9 @@ export class TodoList {
     return !this.tasks.some(task => !task.isDone)
   }
 
+  addTask(task: Task){
+    this.tasks.push(task);
+  }
   static fromTask(desc: string) {
     return new TodoList([new Task(desc)])
   }

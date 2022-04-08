@@ -19,7 +19,7 @@ import {TodosModule} from "../../projects/todos/src/lib/todos.module";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TodosModule,
+    TodosModule.forRoot('ea1933383125c34c2df25e2fc9287a47a96fec75'),
     BrowserAnimationsModule
   ],
   providers: [],
