@@ -1,7 +1,7 @@
 import {Inject, Injectable} from "@angular/core";
 import {ManagesTaskCommandPort, CreatesTodoListCommandPort} from "./port/primary/manages-todo-list.command-port";
 import {CompleteTaskCommand} from "./port/primary/complete-task.command";
-import {BehaviorSubject, defer, filter, from, map, mapTo, Observable, of, switchMap, tap, throwError} from "rxjs";
+import {BehaviorSubject, defer, filter, from, map, mapTo, Observable, of, switchMap, take, tap, throwError} from "rxjs";
 import {CreateTaskCommand} from "./port/primary/create-task.command";
 import {DeleteTaskCommand} from "./port/primary/delete-task.command";
 import {UncompleteTaskCommand} from "./port/primary/uncomplete-task.command";
@@ -36,7 +36,18 @@ export class TodoState implements ManagesTaskCommandPort, CreatesTodoListCommand
   }
 
   createTask(command: CreateTaskCommand): Observable<{ taskId: string }> {
-    return of({taskId: ''});
+    return this._todoLists.asObservable().pipe(
+      take(1),
+      switchMap(todos => from(todos)),
+      filter(todo => todo.uuid === command.listId),
+      switchMap(todo => this._managesTaskDtoPort.create(command.desc).pipe(
+          map((dto: TaskDto) => new Task(dto.desc, dto.completed, dto.id)),
+          tap(task => todo.addTask(task)),
+          tap(() => this._todoLists.next([todo])),
+          map(task => ({taskId: task.id.toString()}))
+        ),
+      )
+    );
   }
 
   delete(command: DeleteTaskCommand): Observable<void> {

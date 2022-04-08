@@ -8,7 +8,7 @@ import {CreateTodoListCommand} from "./create-todo-list.command";
 import {TodoListQuery} from "./todo-list.query";
 
 export const CREATES_TODO_LIST_COMMAND_PORT = new InjectionToken<CreatesTodoListCommandPort>('CREATES_TASK_COMMAND_PORT');
-export const MANAGES_TASK_COMMAND_PORT = new InjectionToken<ManagesTaskCommandPort>('MANAGES_TODO_LIST_COMMAND_PORT');
+export const MANAGES_TASK_PORT = new InjectionToken<ManagesTaskCommandPort>('MANAGES_TASK_PORT');
 
 
 export interface ManagesTaskCommandPort extends DeletesTaskCommandPort, CompletesTaskCommandPort, UncompletesTaskCommandPort, CreatesTaskCommandPort, GetsTodoList{

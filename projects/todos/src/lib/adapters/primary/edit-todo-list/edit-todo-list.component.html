@@ -1,0 +1,21 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item" *ngFor="let task of (tasks$ | async)?.tasks">
+    <input class="form-check-input me-1" type="checkbox" [value]="task.isCompleted" [id]="task.taskId" #task>
+    <span>{{task.desc}}</span>
+  </li>
+</ul>
+<br>
+
+<button type="button" class="btn btn-primary" *ngIf="!isAddVisible" (click)="isAddVisible = !isAddVisible">Add task</button>
+
+<div class="my-container" [hidden]="!isAddVisible" >
+  <form class="form-group" [formGroup]="form">
+    <textarea class="form-control" formControlName="desc"></textarea>
+  </form>
+  <br>
+  <div class="d-flex justify-content-sm-between mt-3">
+    <button type="button" class="btn btn-primary" #createBtn [disabled]="form.invalid">Add task</button>
+    <button type="button" class="btn btn-light" (click)="isAddVisible = false">Cancel</button>
+  </div>
+
+</div>
